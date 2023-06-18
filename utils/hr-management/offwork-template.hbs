@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style>
+        .text-center {
+            text-align: center;
+        }
+
+        .text-bold {
+            font-weight: bold;
+        }
+
+        .text-normal {
+            color: black;
+        }
+
+        * {
+            color: black;
+        }
+    </style>
+</head>
+
+<body class="text-normal">
+    <h1 class="text-center text-normal"> {{title}} </h1>
+    <p>Dear {{manager_name}},</p>
+    <p>Anh/chị đã nhận được thông báo từ nhân viên {{user_name}} với nội dung như sau: </p>
+
+    <p>Ngày: {{date}}</p>
+    <p class="text-bold">Loại: {{getTypeOffwork type}}</p>
+    <p class="text-bold text-normal">Lý do: {{reason}}</p>
+    <div>
+        {{!-- Block for offwork infomation --}}
+        {{#if (isOffworkOrWorkingOutside type)}}
+        <p>Buổi trong ngày: {{getSessionInDay data.session_in_day}}</p>
+        {{/if}}
+
+        {{!-- Block for go_to_office_late infomation --}}
+        {{#if (isGotoOfficeLate type)}}
+        <p>Thời gian đến muộn: {{data.time_to_office_late}}</p>
+        <p>Ngày làm bù: {{data.date_work_compensate}}, từ 17:30 đến {{data.time_work_compensate}}</p>
+        {{/if}}
+
+        {{!-- Block for leave_office_early infomation --}}
+        {{#if (isLeaveOfficeEarly type)}}
+        <p>Thời gian về sớm: {{data.time_leave_office_early}}</p>
+        <p>Ngày làm bù: {{data.date_work_compensate}}, từ 17:30 đến {{data.time_work_compensate}}</p>
+        {{/if}}
+    </div>
+
+    <p>Vui lòng truy cập hệ thống <a href="{{qcd_hr_link}}" target="_blank">tại đây</a> để xử lý yêu cầu.</p>
+
+    <p class="text-center text-normal">©COPYRIGHT BY ARROWTECH</p>
+</body>
+
+</html>

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <style>
+        html,
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        * {
+            color: black;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 35px;
+        }
+
+        h3 {
+            font-size: 21px;
+        }
+
+        h4 {
+            font-size: 18px;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .text-bold {
+            font-weight: bold;
+        }
+
+        .text-normal {
+            color: black;
+        }
+
+        .heading-title {
+            color: black;
+            font-weight: bold;
+        }
+
+        .text-start {
+            text-align: left;
+        }
+
+        .width-200 {
+            width: 200px;
+        }
+
+        .content {
+            margin-left: 24px;
+        }
+
+        .first-row-table {
+            text-align: left;
+            width: 125px;
+        }
+
+        .table-language,
+        .table-language th,
+        .table-language td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+
+        table,
+        th,
+        td {
+            padding: 4px;
+        }
+
+        table.table-introduce th,
+        table.table-introduce td {
+            padding: 0px !important;
+        }
+    </style>
+</head>
+
+<body class="text-normal">
+    <h2 class="text-center">SKILL-SET SUMMARY</h2>
+
+    <div class="content">
+        <table class="table-introduce">
+            <tr>
+                <th class="first-row-table">Name</th>
+                <td>: {{full_name}}</td>
+            </tr>
+
+            <tr>
+                <th class="first-row-table">Position</th>
+                <td>: {{position}}</td>
+            </tr>
+
+            <tr>
+                <th class="first-row-table">Strong points</th>
+                <td>: {{about}}</td>
+            </tr>
+        </table>
+    </div>
+
+    <h3 class="heading-title">1. Technical</h3>
+
+    <h4>- Top language</h4>
+    <div class="content">
+        <table style="width: 100%" class="table-language">
+            <tr>
+                <th class="text-start width-200">Skill</th>
+                <th class="text-start width-200">Level</th>
+                <th class="text-start">Experience (Month)</th>
+            </tr>
+            {{#each strongProgramingLanguage as |language|}}
+            <tr>
+                <td class="width-200">{{language.skill}}</td>
+                <td class="width-200">{{convertLevelToText language.level}}</td>
+                <td>{{language.experience_time}}</td>
+            </tr>
+            {{/each}}
+        </table>
+    </div>
+
+    <h4>- Top Frameworks</h4>
+    <div class="content">
+        <table style="width: 100%" class="table-language">
+            <tr>
+                <th class="text-start width-200">Skill</th>
+                <th class="text-start width-200">Level</th>
+                <th class="text-start">Experience (Month)</th>
+            </tr>
+            {{#each strongFrameworks as |language|}}
+            <tr>
+                <td class="width-200">{{language.skill}}</td>
+                <td class="width-200">{{convertLevelToText language.level}}</td>
+                <td>{{language.experience_time}}</td>
+            </tr>
+            {{/each}}
+        </table>
+    </div>
+
+    <h4>- Top Technologies</h4>
+    <div class="content">
+        <table style="width: 100%" class="table-language">
+            <tr>
+                <th class="text-start width-200">Skill</th>
+                <th class="text-start width-200">Level</th>
+                <th class="text-start">Experience (Month)</th>
+            </tr>
+            {{#each strongTechnologies as |language|}}
+            <tr>
+                <td class="width-200">{{language.skill}}</td>
+                <td class="width-200">{{convertLevelToText language.level}}</td>
+                <td>{{language.experience_time}}</td>
+            </tr>
+            {{/each}}
+        </table>
+    </div>
+
+    <h3 class="heading-title">2. Project experience</h3>
+    <div class="content">{{{project_description }}}</div>
+
+    <h3 class="heading-title">3. Interested in</h3>
+    <div class="content">
+        <span>{{interested_project}}</span>
+    </div>
+</body>
+
+</html>

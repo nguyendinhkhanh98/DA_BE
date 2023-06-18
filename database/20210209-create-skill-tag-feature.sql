@@ -1,0 +1,7 @@
+CREATE TABLE skill_tag (
+	id serial PRIMARY KEY,
+	name VARCHAR (255) UNIQUE NOT NULL,
+	color VARCHAR (255) NOT NULL
+);
+
+ALTER TABLE skill ADD COLUMN tag json;

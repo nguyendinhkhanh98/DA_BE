@@ -1,0 +1,5 @@
+CREATE TABLE jira_project (
+	id serial PRIMARY KEY,
+	name VARCHAR (255) UNIQUE NOT NULL,
+	url VARCHAR (255) UNIQUE NOT NULL
+);

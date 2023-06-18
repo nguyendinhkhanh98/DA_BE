@@ -1,0 +1,296 @@
+<style type="text/css">
+    .qcd-modal-block:not(:first-child) {
+        margin-top: 16px;
+    }
+
+    .qcd-modal-block>.qcd-modal-content {
+        padding: 0.5rem;
+    }
+
+    .qcd-modal-block>.qcd-modal-content .description {
+        font-weight: bold;
+        color: #000000A6;
+    }
+
+    .qcd-modal-block>.qcd-modal-content .qcd-modal-value .color-violet {
+        color: #646060;
+        font-family: "Trebuchet MS", Helvetica, sans-serif;
+    }
+
+    .qcd-modal-value label {
+        font-weight: bold;
+    }
+
+    .qcd-modal-value label::after {
+        content: " %";
+    }
+
+
+    .qcd-modal-block .title {
+        color: black;
+        font-size: 20px;
+    }
+
+    .ant-row {
+        height: auto;
+        display: block;
+        box-sizing: border-box;
+    }
+
+    .ant-col-1 {
+        display: inline-block;
+        width: 4.16666667%;
+    }
+
+    .ant-col-3 {
+        display: inline-block;
+        width: 12.5%;
+    }
+
+    .ant-col-4 {
+        display: inline-block;
+        width: 16.66666667%;
+    }
+
+    .ant-col-5 {
+        display: inline-block;
+        width: 20.8333332%;
+    }
+
+    .ant-col-6 {
+        display: inline-block;
+        width: 25%;
+    }
+
+
+    .ant-col-7 {
+        display: inline-block;
+        width: 29.16666667%;
+    }
+
+    .ant-col-8 {
+        display: inline-block;
+        width: 33.33333333%;
+    }
+
+    .ant-col-10 {
+        display: inline-block;
+        width: 41.66666667%;
+    }
+
+    .ant-col-12 {
+        display: inline-block;
+        width: 50%;
+    }
+
+    .ant-col-21 {
+        display: inline-block;
+        width: 86.5%;
+    }
+
+    .text-bold {
+        font-weight: bold;
+    }
+
+    .title {
+        color: red
+    }
+
+    .text-end {
+        text-align: end;
+    }
+
+    .mt-1 {
+        margin-top: 0.25rem;
+    }
+
+    .text-center {
+        text-align: center;
+    }
+
+    .container {
+        max-width: 90%;
+        margin: 50px 50px;
+    }
+
+    .qcd-gold {
+        color: green !important;
+    }
+
+    .qcd-sliver {
+        color: #84c02a !important;
+    }
+
+    .qcd-bronze {
+        color: #cd7f32 !important;
+    }
+
+    .text-danger {
+        color: red !important;
+    }
+
+    .title-top {
+        margin-top: 50px;
+    }
+</style>
+
+<html>
+
+<body class="app">
+    <h1 class="text-center title-top">QCD KPI Result</h1>
+
+    <section class="container">
+        <section class="ant-row">
+            <div class="ant-col-3"><span>Project:</span></div>
+            <div class="ant-col-21">
+                {{#each projects as |project|}}
+                <div class="ant-col-10">
+                    <img src="{{project.avatar}}" height="16" width="16" border="0" align="absmiddle"
+                        alt="{{project.name}}" />
+                    <span>{{project.name}}</span>
+                </div>
+                {{/each}}
+            </div>
+        </section>
+        <section class="ant-row mt-1">
+            <div class="ant-col-3"><span>Duration:</span></div>
+            <div class="ant-col-21">
+                {{duration}}
+            </div>
+        </section>
+        <section class="ant-row qcd-modal-block">
+            <span class="text-bold title">"Q"uality</span>
+            <div class="ant-row qcd-modal-content">
+                <p class="description">Quality compliance rate: Ratio of bug</p>
+
+                <div class="ant-row qcd-modal-value">
+                    <div class="ant-row">
+                        <span class="ant-col-6 color-violet">Bug Ratio By Number</span>
+                        <span class="ant-col-6 color-violet text-end">Number of bug &nbsp;</span>
+                        <span class="ant-col-8 color-violet"> / Number of issue</span>
+                        <span class="ant-col-3">Result</span>
+                    </div>
+                    <div class="ant-row {{getClassForBugRatioByNumber bugRatioByNumber}}">
+                        <span class="ant-col-6">&nbsp;</span>
+                        <span class="ant-col-6 text-end">{{ quality.bugRatioByNumber.count }} &nbsp;</span>
+                        <span class="ant-col-7">/ {{ quality.bugRatioByNumber.total }}</span>
+                        <span class="ant-col-1">=</span>
+                        <div class="ant-col-3">
+                            <label>{{ bugRatioByNumber }}</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ant-row qcd-modal-value">
+                    <div class="ant-row">
+                        <span class="ant-col-6 color-violet">Bug Ratio By Hour</span>
+                        <span class="ant-col-6 color-violet text-end">Total hour of bug &nbsp;</span>
+                        <span class="ant-col-8 color-violet"> / Total hour of issue</span>
+                        <span class="ant-col-3">Result</span>
+                    </div>
+
+                    <div class="ant-row {{getClassForBugRatioByNumber bugRatioByHour}}">
+                        <span class="ant-col-6">&nbsp;</span>
+                        <span class="ant-col-6 text-end">{{ quality.bugRatioByHour.bugHour }} &nbsp;</span>
+                        <span class="ant-col-7">/ {{ quality.bugRatioByHour.issueHour }}</span>
+                        <span class="ant-col-1">=</span>
+                        <div class="ant-col-3">
+                            <label>{{ bugRatioByHour }}</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ant-row qcd-modal-value">
+                    <div class="ant-row">
+                        <span class="ant-col-5 color-violet">Degradation Ratio By Number</span>
+                        <span class="ant-col-7 color-violet text-end">Number of degradation &nbsp;</span>
+                        <span class="ant-col-8 color-violet"> / Number of issue</span>
+                        <span class="ant-col-3">Result</span>
+                    </div>
+
+                    <div class="ant-row {{getClassForBugRatioByNumber degrateTotal}}">
+                        <span class="ant-col-6">&nbsp;</span>
+                        <span class="ant-col-6 text-end">{{ quality.degrate.count }} &nbsp;</span>
+                        <span class="ant-col-7">/ {{ quality.degrate.total }}</span>
+                        <span class="ant-col-1">=</span>
+                        <div class="ant-col-3">
+                            <label>{{ degrateTotal }}</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ant-row qcd-modal-value">
+                    <div class="ant-row">
+                        <span class="ant-col-6 color-violet">Degradation Ratio By Hour</span>
+                        <span class="ant-col-6 color-violet text-end">Total hour of degradation &nbsp;</span>
+                        <span class="ant-col-8 color-violet"> / Total hour of issue</span>
+                        <span class="ant-col-3">Result</span>
+                    </div>
+
+                    <div class="ant-row {{getClassForBugRatioByNumber degrationRatioByHour}}">
+                        <span class="ant-col-6">&nbsp;</span>
+                        <span class="ant-col-6 text-end">{{ quality.degradationByHour.degradationHour }} &nbsp;</span>
+                        <span class="ant-col-7">/ {{ quality.degradationByHour.issueHour }}</span>
+                        <span class="ant-col-1">=</span>
+                        <div class="ant-col-3">
+                            <label>{{ degrationRatioByHour }}</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="ant-row qcd-modal-block">
+            <span class="text-bold title">"C"ost</span>
+            <div class="ant-row qcd-modal-content">
+                <p class="description">Cost compliance rate: Ratio of between Actual Man hour and Estimated Man hour</p>
+
+                <div class="qcd-modal-value">
+                    <div class="ant-row">
+                        <span class="ant-col-12 color-violet text-end">(Actual Manhours - Estimated Manhours)
+                            &nbsp;</span>
+                        <span class="ant-col-8 color-violet"> / Estimated Manhours</span>
+                        <span class="ant-col-3">Result</span>
+                    </div>
+
+                    <div class="ant-row {{getClassForOverEstimate costTotal}}">
+                        <span class="ant-col-12 text-end">({{ cost.actualManhour }} -
+                            {{ cost.estimateManhour }}) &nbsp;</span>
+                        <span class="ant-col-7">/ {{ cost.estimateManhour }}</span>
+                        <span class="ant-col-1">=</span>
+                        <div class="ant-col-3">
+                            <label>{{ costTotal }}</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="ant-row qcd-modal-block">
+            <span class="text-bold title">"D"elivery</span>
+            <div class="ant-row qcd-modal-content">
+                <p class="description">Delivery date compliance rate: Ratio of meeting the Answer due date</p>
+
+                <div class="qcd-modal-value">
+                    <div class="ant-row">
+                        <span class="ant-col-12 color-violet text-end">Number of meeting the Answer due date
+                            &nbsp;</span>
+                        <span class="ant-col-8 color-violet"> / Number of issue</span>
+                        <span class="ant-col-3">Result</span>
+                    </div>
+
+                    <div class="ant-row {{getClassForOverDueDate deliveryTotal}}">
+                        <span class="ant-col-12 text-end">{{ delivery.issueBeforeDuedate }} &nbsp;</span>
+                        <span class="ant-col-7">/ {{ delivery.totalIssue }}</span>
+                        <span class="ant-col-1">=</span>
+                        <div class="ant-col-3">
+                            <label>{{ deliveryTotal }}</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+</body>
+
+</html>

@@ -1,0 +1,1 @@
+ALTER TABLE role_project ADD COLUMN description text;

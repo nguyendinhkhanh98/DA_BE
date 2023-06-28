@@ -259,7 +259,8 @@ const getUsersAssignableInProject = (req, res) => {
     auth: { username: username, password: apiToken },
     headers: {
       Accept: "application/json"
-    }
+    },
+    timeout: 1000 * 10
   };
   axios(option)
     .then(response => {

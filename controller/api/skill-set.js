@@ -622,7 +622,7 @@ const FetchPeriodByUserID = async (req, res) => {
         isAdmin,
         isLeader
       });
-
+      console.log('data1', data)
       if (isAdmin || isLeader) {
         data = data.filter(item => {
           if ([statusSkill.Draft, statusSkill.Rejected].includes(item.status)) {
@@ -633,6 +633,7 @@ const FetchPeriodByUserID = async (req, res) => {
           return true;
         });
       }
+      console.log('data2', data)
       res.json(new ResponseFormat(200, true, data, "").toObject());
     } catch (error) {
       HandleErrorKnex(res, error);

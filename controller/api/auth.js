@@ -7,7 +7,7 @@ const JiraProjectRepository = require("../../repository/postgres-repository/jira
 const UserRepository = require("../../repository/postgres-repository/user.repository");
 
 const login = async (req, res) => {
-  console.log('password', bcrypt.decodeBase64('$2a$10$cneLGjBFt43VI8L8Y3l0we1uWCcd4p1MLfE3m8pc2khY9HvUzO7u2'))
+  // console.log('password', bcrypt.decodeBase64('$2a$10$cneLGjBFt43VI8L8Y3l0we1uWCcd4p1MLfE3m8pc2khY9HvUzO7u2'))
   const { username, password, jiraName } = req.body;
   const users = await UserRepository.getUserByUsernameOrEmail(username);
 

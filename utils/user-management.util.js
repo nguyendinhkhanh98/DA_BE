@@ -38,7 +38,17 @@ const extractUserRole = userWithListInfo => {
 
 const extractUserProject = userWithListInfo => {
   let listUserProject = userWithListInfo
-    .map(e => ({ project_id: e.project_id, project: e.project }))
+    .map(e => { 
+      const listTask = userWithListInfo.filter(i => i.project_id == e.project_id)?.map(it => (
+          { 
+            contentTask: it?.contentTask, status: it?.status, project: it.project, role: it.roleProject, start_date: it?.task_history_start, end_date: it?.task_history_end
+          }
+        )
+      )
+      return {
+        project_id: e.project_id, project: e.project, role: e.roleProject, listTask: listTask
+      }
+     })
     .filter(item => item.project_id);
 
   let projectList = _.uniqBy(listUserProject, item => item.project_id);

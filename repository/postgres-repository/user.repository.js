@@ -65,7 +65,12 @@ const getBodyQueryUser = () => {
       role: "role.name",
       jira_email: "user.jira_email",
       project: "task.name",
-      delete_flag: "user.delete_flag"
+      delete_flag: "user.delete_flag",
+      contentTask: "user_task_history.comment",
+      status: "user_task_history.status",
+      roleProject: "role_project.name",
+      task_history_start: "user_task_history.start_date",
+      task_history_end: "user_task_history.end_date"
     })
     .select()
     .from("user")
@@ -75,7 +80,9 @@ const getBodyQueryUser = () => {
     .leftJoin("role", "user_role.role_id", "role.id")
 
     .leftJoin("user_project", "user.id", "user_project.user_id")
-    .leftJoin("task", "task.id", "user_project.project_id");
+    .leftJoin("task", "task.id", "user_project.project_id")
+    .leftJoin("user_task_history", "user_task_history.user_id", "user.id")
+    .leftJoin("role_project", "user_project.role_project_id", "role_project.id")
 };
 
 const getBodyQueryUserProject = () => {

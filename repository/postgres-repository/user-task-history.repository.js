@@ -24,13 +24,13 @@ module.exports.getAllHistoryByTaskId = id => {
   return bodyQuery().where("user_task_history.task_id", id);
 };
 
-module.exports.addOrCreateTaskHistory = ({ id, user_id, task_id, start_date, end_date, comment, attachment }) => {
+module.exports.addOrCreateTaskHistory = ({ id, user_id, task_id, start_date, end_date, comment, attachment, fileReport, status }) => {
   if (!id)
     return knex("user_task_history")
-      .insert({ user_id, task_id, start_date, end_date, comment, attachment })
+      .insert({ user_id, task_id, start_date, end_date, comment, attachment, fileReport, status })
       .returning("*");
   return knex("user_task_history")
-    .update({ user_id, task_id, start_date, end_date, comment, attachment })
+    .update({ user_id, task_id, start_date, end_date, comment, attachment, fileReport, status })
     .where({ id })
     .returning("*");
 };

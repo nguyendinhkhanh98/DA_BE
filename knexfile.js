@@ -1,5 +1,4 @@
 if (!process.env.PORT) require("dotenv-flow").config({ path: "environments/" });
-
 module.exports = {
   client: "pg",
   connection: {

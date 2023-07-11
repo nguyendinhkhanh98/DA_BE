@@ -147,8 +147,11 @@ module.exports.deleteAttackFile = async (req, res) => {
 };
 
 module.exports.downAttackFile = async (req, res) => {
+  console.log('dir', dir)
+  console.log('req.params.path', req.params.path)
   const path = `${dir}/${req.params.path}`;
-  if (fs.existsSync(path)) res.sendFile(path);
+  console.log('path', path)
+  if (fs.existsSync(path)) res.sendFile(__dirname + path);
   else res.json(Formatter.badRequest());
 };
 

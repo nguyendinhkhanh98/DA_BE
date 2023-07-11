@@ -26,3 +26,6 @@ SLACK_URL=https://hooks.slack.com/services/T037RBQEF/B0153AV2B8W/DDS5BkesEiu1Rw7
 #Auth
 JIRA_USERNAME=
 API_TOKEN=
+
+# File upload
+FILE_DIRECTORY=uploads

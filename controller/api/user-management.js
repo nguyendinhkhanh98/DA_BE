@@ -51,6 +51,7 @@ const createNewUser = async (req, res) => {
 
   try {
     const userIds = await UserRepository.createNewAccount(payload, hashPassword);
+    console.log('userIds', userIds)
     userId = userIds[0];
   } catch (error) {
     logger.error(error);

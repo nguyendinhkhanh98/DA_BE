@@ -28,5 +28,6 @@ router.use("/api/v2", require("./api-v2/slack-integration.api"));
 router.use("/api/v2", require("./api-v2/user-project-role.api"));
 router.use("/api/v2", require("./api-v2/financial-plan.api"));
 router.use("/api/v2", require("./api-v2/user-work-day.api"));
+router.use("/api/v2", require("./api-v2/evaluate-task.api"));
 
 module.exports = router;

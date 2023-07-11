@@ -96,3 +96,6 @@ public/
 
 # Mac OSX
 .DS_Store
+
+# uploads
+uploads

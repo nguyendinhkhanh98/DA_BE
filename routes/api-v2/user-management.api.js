@@ -5,9 +5,9 @@ const UserManagementControllerV2 = require("../../controller/api-v2/user-managem
 const permissions = [["admin"], ["manager"]];
 
 router.get("/user-management/list-leader", UserManagementControllerV2.getListLeader);
-router.get("/user-management/list-all-user", guard.check(permissions), UserManagementControllerV2.getAllUser);
+router.get("/user-management/list-all-user", guard.check([["admin"], ["manager"], ["leader"], ["developer"], ["tester"]]), UserManagementControllerV2.getAllUser);
 
-router.get("/user-management/list-all-user-project", guard.check(permissions), UserManagementControllerV2.getAllUserProject);
+router.get("/user-management/list-all-user-project", guard.check([["admin"], ["manager"], ["leader"], ["developer"], ["tester"]]), UserManagementControllerV2.getAllUserProject);
 
 router.post("/user-management/restore-user", guard.check(permissions), UserManagementControllerV2.restoreUserById);
 router.post("/user-management/roles", guard.check(permissions), UserManagementControllerV2.createNewRole);

@@ -24,13 +24,18 @@ module.exports.getAllHistoryByTaskId = id => {
   return bodyQuery().where("user_task_history.task_id", id);
 };
 
-module.exports.addOrCreateTaskHistory = ({ id, user_id, task_id, start_date, end_date, comment, attachment, fileReport, status }) => {
-  if (!id)
-    return knex("user_task_history")
-      .insert({ user_id, task_id, start_date, end_date, comment, attachment, fileReport, status })
+module.exports.addOrCreateTaskHistory = async ({ id, user_id, task_id, start_date, end_date, comment, attachment, fileReport, status, score }) => {
+  if (!id) {
+    const createUserTaskHistory = await knex("user_task_history")
+      .insert({ user_id, task_id, start_date, end_date, comment, attachment, fileReport, status, score })
       .returning("*");
+    const project = await knex('task').select('*').where({ id: task_id})
+    return knex("notification")
+      .insert({ user_id, content: `Bạn được gán công việc mới trong project ${project?.[0]?.name}`, type: "assign", isRead: false })
+  }
+    
   return knex("user_task_history")
-    .update({ user_id, task_id, start_date, end_date, comment, attachment, fileReport, status })
+    .update({ user_id, task_id, start_date, end_date, comment, attachment, fileReport, status, score })
     .where({ id })
     .returning("*");
 };

@@ -25,7 +25,7 @@ router
 router.route("/skill-set/reject").post(SkillSetController.RejectSkillSet);
 router
   .route("/skill-set/category")
-  .get(guard.check(permissions), SkillSetController.FetchCategory)
+  .get(guard.check([["admin"], ["manager"], ["leader"], ["developer"], ["tester"]]), SkillSetController.FetchCategory)
   .post(guard.check(permissions), SkillSetController.CreateCategory)
   .put(guard.check(permissions), SkillSetController.UpdateCategory)
   .delete(guard.check(permissions), SkillSetController.DeleteCategory);

@@ -6,9 +6,7 @@ const _ = require("lodash");
 module.exports.getAllEvaluateTask = async (req, res, next) => {
   try {
     let userTaskHistory = await Repository.getAllEvaluateTask(req?.query);
-
     userTaskHistory = _.groupBy(userTaskHistory, "user_id");
-    console.log('userTaskHistory', userTaskHistory)
     userTaskHistory = Object.values(userTaskHistory)
     res.json(Formatter.success(null, userTaskHistory));
   } catch (error) {

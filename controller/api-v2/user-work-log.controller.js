@@ -14,6 +14,40 @@ const saveUserWorkdaysByProjectInMonth = async (req, res, next) => {
   }
 };
 
+const getAllNotificationByUserId = async (req, res, next) => {
+  const { id } = req.user;
+  const { status } = req.query
+  const isRead = []
+  if(status == 'all' || !status) {
+    isRead.push(true)
+    isRead.push(false)
+  }
+  if(status == 'unread') {
+    isRead.push(false)
+  }
+  if(status == 'readed') {
+    isRead.push(true)
+  }
+  try {
+    let newRecord = await UserWorkDayRepository.getAllNotificationByUserId({ id, isRead });
+    res.json(Formatter.success("get_list_notification", newRecord));
+  }catch (error) {
+    next( new APIErrorWithKnex({ errors: error }));
+  }
+};
+
+const putAllNotificationByUserId = async (req, res, next) => {
+  try {
+    const { id } = req.user;
+    let newRecord = await UserWorkDayRepository.putAllNotificationByUserId({ id })
+    res.json(Formatter.success("put_list_notification", newRecord));
+  }catch (error) {
+    next( new APIErrorWithKnex({ errors: error }));
+  }
+}
+
 module.exports = {
-  saveUserWorkdaysByProjectInMonth
+  saveUserWorkdaysByProjectInMonth,
+  getAllNotificationByUserId,
+  putAllNotificationByUserId
 }

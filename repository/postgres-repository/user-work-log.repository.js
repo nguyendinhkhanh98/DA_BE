@@ -7,6 +7,16 @@ const saveUserWorkdaysByProjectInMonth = (user_id, project_id, actual_work_day, 
   .returning("*");
 };
 
+const getAllNotificationByUserId = ({ id, isRead}) => {
+  return knex('notification').select('*').where({ user_id: id }).whereIn('isRead', isRead)
+};
+
+const putAllNotificationByUserId = async({ id }) => {
+  return knex('notification').where({ user_id: id }).update({ isRead: true })
+};
+
 module.exports = {
-  saveUserWorkdaysByProjectInMonth
+  saveUserWorkdaysByProjectInMonth,
+  getAllNotificationByUserId,
+  putAllNotificationByUserId
 }

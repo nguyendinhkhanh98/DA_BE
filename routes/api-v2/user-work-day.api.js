@@ -8,4 +8,8 @@ router
   .route("/get-user-actual-working-day")
   .get(guard.check([permissions]), UserWorkDayControllerV2.saveUserWorkdaysByProjectInMonth);
 
+router
+  .get("/notification", UserWorkDayControllerV2.getAllNotificationByUserId)
+  .put("/notification", UserWorkDayControllerV2.putAllNotificationByUserId)
+
 module.exports = router;

@@ -39,16 +39,16 @@ router
 
 router
   .route("/business-skill-set/tasks")
-  .get(guard.check(permissions), TaskController.getAllTask)
+  .get(guard.check([["admin"], ["manager"], ["leader"], ["developer"], ["tester"]]), TaskController.getAllTask)
   .post(guard.check(permissions), TaskController.createTask);
 router
   .route("/business-skill-set/tasks/:id")
-  .get(guard.check(permissions), TaskController.getTask)
+  .get(guard.check([["admin"], ["manager"], ["leader"], ["developer"], ["tester"]]), TaskController.getTask)
   .post(guard.check(permissions), TaskController.updateTask)
   .put(guard.check(permissions), TaskController.restoreTask)
   .delete(guard.check(permissions), TaskController.archiveTask);
 
-router.get("/business-skill-set/task-status", guard.check(permissions), TaskController.getAllTaskStatus);
+router.get("/business-skill-set/task-status", guard.check([["admin"], ["manager"], ["leader"], ["developer"], ["tester"]]), TaskController.getAllTaskStatus);
 
 router.get(
   "/business-skill-set/latest-assessment-approved",

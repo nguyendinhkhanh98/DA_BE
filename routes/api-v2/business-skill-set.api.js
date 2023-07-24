@@ -80,6 +80,8 @@ router
 
 router.get("/business-skill-set/task-history/view-all", TaskController.getAllMemberTaskHistory);
 
+router.get("/business-skill-set/task-history-user", TaskController.getAllUserTaskHistoryByUserId);
+
 // Attack File Management
 router.post("/files", upload.single("file"), TaskController.uploadAttackFile);
 router.get("/files/:path", TaskController.downAttackFile);

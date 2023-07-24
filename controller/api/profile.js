@@ -60,7 +60,14 @@ const editProfile = async (req, res) => {
   }
 };
 
+const editProfileGeneralScore = async (req, res) => {
+  const { generalScore, id } = req.body
+  await ProfileRepository.updateUserProfileGeneralScore(generalScore , id);
+  return res.json({ message: "Update success!" });
+}
+
 module.exports = {
   getProfile,
-  editProfile
+  editProfile,
+  editProfileGeneralScore
 };

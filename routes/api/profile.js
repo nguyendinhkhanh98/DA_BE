@@ -7,5 +7,6 @@ const upload = multer({ dest: "./assets/CV" });
 
 router.get("/profile", ProfileController.getProfile);
 router.put("/profile/edit", editProfileValidator(), upload.single("cv"), ProfileController.editProfile);
+router.put("/profile/editGeneralScore", ProfileController.editProfileGeneralScore);
 
 module.exports = router;

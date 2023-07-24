@@ -29,9 +29,14 @@ const getListUserProfileByUserId = listUserId => {
   return knex("user_profile").select().whereIn("id", listUserId);
 };
 
+const updateUserProfileGeneralScore = (generalScore , id) => {
+  return knex("user_profile").where({ id: parseInt(id) }).update({ general_score: generalScore })
+};
+
 module.exports = {
   unlinkOldCV,
   updateUserProfile,
 
-  getListUserProfileByUserId
+  getListUserProfileByUserId,
+  updateUserProfileGeneralScore
 };

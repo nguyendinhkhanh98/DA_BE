@@ -41,12 +41,14 @@ const extractUserProject = userWithListInfo => {
     .map(e => { 
       const listTask = userWithListInfo.filter(i => i.project_id == e.project_id)?.map(it => (
           { 
-            contentTask: it?.contentTask, status: it?.status, project: it.project, role: it.roleProject, start_date: it?.task_history_start, end_date: it?.task_history_end
+            contentTask: it?.contentTask, status: it?.status, project: it.project, role: it.roleProject, start_date: it?.task_history_start, end_date: it?.task_history_end, score: it?.score
           }
         )
       )
+      const total = listTask?.filter(i => i?.score && i?.score != 0)?.length
+      const totalScore = listTask.reduce((prev, curr) => prev + (curr?.score || 0), 0)
       return {
-        project_id: e.project_id, project: e.project, role: e.roleProject, listTask: listTask
+        project_id: e.project_id, project: e.project, role: e.roleProject, listTask: listTask, averageScore: total != 0 ? (totalScore/total).toFixed(2) : 0
       }
      })
     .filter(item => item.project_id);

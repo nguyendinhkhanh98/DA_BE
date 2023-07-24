@@ -50,3 +50,19 @@ const bodyQuery = () => {
     .leftJoin("task", "task.id", "user_task_history.task_id")
     .leftJoin("user_profile", "user_profile.id", "user_task_history.user_id");
 };
+
+module.exports.getAllTaskHistoryByUserId = (userId) => {
+  return knex("user_task_history")
+  .column("start_date", "end_date", "status", "updated_at", "score", " comment", { 
+    fullName: "user_profile.full_name", projectName: "task.name", projectId: "task.id", roleName: "role_project.name", user_id: "user_profile.id", id: "user_task_history.id" }
+  )
+  .select()
+  .innerJoin('user_profile', 'user_task_history.user_id', 'user_profile.id')
+  .innerJoin('user_project', function() {
+    this.on('user_task_history.task_id', 'user_project.project_id')
+    .andOn('user_task_history.user_id', 'user_project.user_id')
+  })
+  .innerJoin('role_project', 'role_project.id', 'user_project.role_project_id')
+  .innerJoin('task', 'task.id', 'user_task_history.task_id')
+  .where('user_task_history.user_id', userId)
+}

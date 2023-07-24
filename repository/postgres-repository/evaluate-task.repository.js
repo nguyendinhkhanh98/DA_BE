@@ -1,7 +1,6 @@
 const knex = require("../../config/database.js");
 
 module.exports.getAllEvaluateTask = (query) => {
-  console.log('query', query)
   const { since, until } = query
   return knex("user_task_history")
     .column("start_date", "end_date", "status", "updated_at", "score", { 

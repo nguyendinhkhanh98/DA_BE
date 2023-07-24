@@ -59,7 +59,7 @@ const getUserIn = user_ids => {
 
 const getBodyQueryUser = () => {
   return knex
-    .column("user.id", "username", "email", "address", "phone", "birthday", "avatar", "role_id", "project_id", "cv", {
+    .column("user.id", "username", "email", "address", "phone", "birthday", "avatar", "role_id", "project_id", "cv", "general_score", {
       fullName: "full_name",
       userId: "user.id",
       role: "role.name",
@@ -70,7 +70,8 @@ const getBodyQueryUser = () => {
       status: "user_task_history.status",
       roleProject: "role_project.name",
       task_history_start: "user_task_history.start_date",
-      task_history_end: "user_task_history.end_date"
+      task_history_end: "user_task_history.end_date",
+      score: "user_task_history.score"
     })
     .select()
     .from("user")
@@ -81,7 +82,10 @@ const getBodyQueryUser = () => {
 
     .leftJoin("user_project", "user.id", "user_project.user_id")
     .leftJoin("task", "task.id", "user_project.project_id")
-    .leftJoin("user_task_history", "user_task_history.user_id", "user.id")
+    .leftJoin('user_task_history', function() {
+      this.on('user_task_history.task_id', 'user_project.project_id')
+      .andOn('user_task_history.user_id', 'user_project.user_id')
+    })
     .leftJoin("role_project", "user_project.role_project_id", "role_project.id")
 };
 

@@ -8,7 +8,7 @@ const saveUserWorkdaysByProjectInMonth = (user_id, project_id, actual_work_day, 
 };
 
 const getAllNotificationByUserId = ({ id, isRead}) => {
-  return knex('notification').select('*').where({ user_id: id }).whereIn('isRead', isRead)
+  return knex('notification').select('*').where({ user_id: id }).whereIn('isRead', isRead).orderBy('created_at', 'desc')
 };
 
 const putAllNotificationByUserId = async({ id }) => {

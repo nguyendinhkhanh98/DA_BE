@@ -1,0 +1,61 @@
+{
+  // These tasks will run in order when initializing your CodeSandbox project.
+  "setupTasks": [
+    {
+      "name": "Install Dependencies",
+      "command": "yarn install"
+    }
+  ],
+
+  // These tasks can be run from CodeSandbox. Running one will open a log in the app.
+  "tasks": {
+    "test": {
+      "name": "test",
+      "command": "yarn test",
+      "runAtStart": false
+    },
+    "dev": {
+      "name": "dev",
+      "command": "yarn dev",
+      "runAtStart": true,
+      "preview": {
+        "port": 3200
+      }
+    },
+    "dev-it": {
+      "name": "dev-it",
+      "command": "yarn dev-it",
+      "runAtStart": false
+    },
+    "prod": {
+      "name": "prod",
+      "command": "yarn prod",
+      "runAtStart": false
+    },
+    "knex-it": {
+      "name": "knex-it",
+      "command": "yarn knex-it",
+      "runAtStart": false
+    },
+    "knex-prod": {
+      "name": "knex-prod",
+      "command": "yarn knex-prod",
+      "runAtStart": false
+    },
+    "knex-dev": {
+      "name": "knex-dev",
+      "command": "yarn knex-dev",
+      "runAtStart": false
+    },
+    "knex-make-seed": {
+      "name": "knex-make-seed",
+      "command": "yarn knex-make-seed",
+      "runAtStart": false
+    },
+    "knex-seed": {
+      "name": "knex-seed",
+      "command": "yarn knex-seed",
+      "runAtStart": false
+    }
+  }
+}

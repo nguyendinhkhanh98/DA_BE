@@ -186,7 +186,7 @@ module.exports.syncTaskWithJiraProject = async (req, res, next) => {
 module.exports.getAllUserTaskHistoryByUserId = async (req, res, next) => {
   try {
     let item = await TaskHistoryRepository.getAllTaskHistoryByUserId(req.user.id);
-    res.json(Formatter.success("remove_member_successfully", item));
+    res.json(Formatter.success("get_list_task_success", item));
   } catch (error) {
     next(new APIErrorWithKnex({ errors: error }));
   }

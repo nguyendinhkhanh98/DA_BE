@@ -1,7 +1,7 @@
 {
-  "name": "jira-qcd-api",
+  "name": "datn-api",
   "version": "1.0.0",
-  "description": "Jira QCD API",
+  "description": "DA API",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -14,7 +14,7 @@
     "knex-make-seed": "knex seed:make",
     "knex-seed": "knex seed:run"
   },
-  "author": "anhbv",
+  "author": "khannd",
   "license": "ISC",
   "dependencies": {
     "adm-zip": "^0.5.1",

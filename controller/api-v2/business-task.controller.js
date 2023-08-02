@@ -11,9 +11,11 @@ const username = process.env.JIRA_USERNAME;
 const apiToken = process.env.API_TOKEN;
 const axios = require("axios");
 const fs = require("fs");
+const https = require('https');
 var shell = require("shelljs");
 const { message } = require("response-format");
 var dir = process.env.FILE_DIRECTORY;
+const cloudinaryUtils = require("../../utils/cloudinary");
 
 module.exports.getAllTask = async (req, res, next) => {
   try {
@@ -133,8 +135,9 @@ module.exports.removeTaskHistory = async (req, res, next) => {
 };
 
 module.exports.uploadAttackFile = async (req, res) => {
-  if (!fs.existsSync(dir)) shell.mkdir("-p", dir);
-  res.json(Formatter.success("upload_success", req.file.filename));
+  // if (!fs.existsSync(dir)) shell.mkdir("-p", dir);
+  const result = await cloudinaryUtils.uploadSingleByPath(req.file.path)
+  res.json(Formatter.success("upload_success", result));
 };
 
 module.exports.deleteAttackFile = async (req, res) => {
@@ -147,11 +150,12 @@ module.exports.deleteAttackFile = async (req, res) => {
 };
 
 module.exports.downAttackFile = async (req, res) => {
-  console.log('dir', dir)
-  console.log('req.params.path', req.params.path)
-  const path = `${dir}/${req.params.path}`;
-  console.log('path', path)
-  if (fs.existsSync(path)) res.sendFile(__dirname + path);
+  const path = req.query.path;
+  if (path) {
+    https.get(path, (file) => {
+      file.pipe(res)
+    })
+  }
   else res.json(Formatter.badRequest());
 };
 

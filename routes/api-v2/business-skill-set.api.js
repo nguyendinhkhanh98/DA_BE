@@ -84,7 +84,7 @@ router.get("/business-skill-set/task-history-user", TaskController.getAllUserTas
 
 // Attack File Management
 router.post("/files", upload.single("file"), TaskController.uploadAttackFile);
-router.get("/files/:path", TaskController.downAttackFile);
+router.get("/files", TaskController.downAttackFile);
 router.delete("/files/:path", TaskController.deleteAttackFile);
 
 router.put("/business-skill-set/leader", BusinessSkillController.updateBusinessLeaderById);

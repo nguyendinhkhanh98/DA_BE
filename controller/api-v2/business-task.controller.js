@@ -137,7 +137,7 @@ module.exports.removeTaskHistory = async (req, res, next) => {
 module.exports.uploadAttackFile = async (req, res) => {
   // if (!fs.existsSync(dir)) shell.mkdir("-p", dir);
   console.log('req.file.path', req.file.path)
-  const result = await cloudinaryUtils.uploadSingle(req.file.path)
+  const result = await cloudinaryUtils.uploadSingle(req.file)
   console.log('result', result)
   res.json(Formatter.success("upload_success", result));
 };

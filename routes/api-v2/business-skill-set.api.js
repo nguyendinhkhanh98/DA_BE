@@ -6,14 +6,7 @@ const BusinessSkillController = require("../../controller/api-v2/business-skill.
 const TaskController = require("../../controller/api-v2/business-task.controller");
 const permissions = [["admin"]];
 const multer = require("multer");
-var storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, process.env.FILE_DIRECTORY);
-  },
-  filename: function (req, file, cb) {
-    cb(null, `${Date.now()}_${file.originalname}`);
-  }
-});
+const storage = multer.memoryStorage()
 var upload = multer({ storage: storage });
 
 router

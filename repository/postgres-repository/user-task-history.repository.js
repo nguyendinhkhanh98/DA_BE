@@ -53,7 +53,7 @@ const bodyQuery = () => {
 
 module.exports.getAllTaskHistoryByUserId = (userId) => {
   return knex("user_task_history")
-  .column("start_date", "end_date", "status", "updated_at", "score", " comment", { 
+  .column("start_date", "end_date", "status", "updated_at", "score", " comment", "attachment", "fileReport", { 
     fullName: "user_profile.full_name", projectName: "task.name", projectId: "task.id", roleName: "role_project.name", user_id: "user_profile.id", id: "user_task_history.id" }
   )
   .select()

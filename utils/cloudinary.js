@@ -49,7 +49,7 @@ cloudinaryUtils.uploadSingle=(file, options={})=>{
         let stream = cloudinary.uploader.upload_stream(options,
           (error, result) => {
             if (result) {
-              resolve(result.secure_url);
+              resolve(result);
             } else {
               reject(error);
             }

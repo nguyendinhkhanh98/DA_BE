@@ -138,8 +138,10 @@ module.exports.uploadAttackFile = async (req, res) => {
   // if (!fs.existsSync(dir)) shell.mkdir("-p", dir);
   try {
     const result = await cloudinaryUtils.uploadSingle(req.file)
+    console.log('result', result)
     res.json(Formatter.success("upload_success", result));
   } catch(err) {
+    console.log('err', err)
     res.json(Formatter.badRequest());
   }
 };
